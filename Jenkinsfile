@@ -1,13 +1,13 @@
 pipeline {
-   agent { docker { image 'maven:3.3.3' } }
+   agent any
    stages {
       stage('build') {
          steps {
             retry(2){
                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-            }
-            timeout(time: 3, unit: 'SECONDS'){
                mvn clean verify
+            }
+
             }
          }
       }
