@@ -3,10 +3,10 @@ pipeline {
    stages {
            stage('build') {
                   steps {
-                             retry(2) {
+                             retry(2){
                          echo Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
-            timeout(time: 3, unit: 'SECONDS') {
+            timeout(time: 3, unit: 'SECONDS'){
                sh 'ncdu'
             }
          }
