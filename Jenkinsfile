@@ -1,10 +1,10 @@
 pipeline {
    agent { docker { image 'maven:3.3.3' } }
    stages {
-           stage('build') {
-                  steps {
-                             retry(2){
-                         echo Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+      stage('build') {
+         steps {
+            retry(2){
+               echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
             timeout(time: 3, unit: 'SECONDS'){
                sh 'ncdu'
@@ -14,9 +14,9 @@ pipeline {
    }
 
    post {
-           always {
-         echo 'This will always run'
-      }
+       always {
+       echo 'This will always run'
+   }
    success {
        echo 'This will run only if successful'
    }
