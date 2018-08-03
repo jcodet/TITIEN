@@ -7,7 +7,7 @@ pipeline {
                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
             timeout(time: 3, unit: 'SECONDS'){
-               sh 'ncdu'
+               mvn clean verify
             }
          }
       }
