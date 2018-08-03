@@ -3,11 +3,9 @@ pipeline {
    stages {
       stage('build') {
          steps {
-            retry(2){
-               echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-               mvn clean verify
-            }
-         }
+           echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+           mvn clean verify
+         }        
       }
    }
    post {
