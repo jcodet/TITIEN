@@ -18,6 +18,7 @@ pipeline {
          }
          post {
             always {
+               junit 'build/reports/**/*.xml'
                echo 'This will always run'
             }
             success {
