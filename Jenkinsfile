@@ -14,7 +14,8 @@ pipeline {
       stage('build') {
          steps {
            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-           sh 'mvn -Dmaven.test.failure.ignore=true install'
+           sh 'mvn clean install'
+           junit 'target/surefire-reports/**/*.xml'
          }
          post {
             always {
@@ -23,7 +24,7 @@ pipeline {
             }
             success {
                echo 'This will run only if successful'
-               junit 'target/surefire-reports/**/*.xml'
+
             }
             failure {
                echo 'This will run only if failed'
