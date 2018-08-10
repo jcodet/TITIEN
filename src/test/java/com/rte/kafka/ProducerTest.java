@@ -1,4 +1,4 @@
-package java.com.rte.kafka;
+package com.rte.kafka;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,7 @@ public class ProducerTest {
 	@Test
 	public void shouldBeOK() {
 		assertTrue(true);
-		
+
 	}
 
 }
