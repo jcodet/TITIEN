@@ -11,10 +11,8 @@ pipeline {
             echo "M2_HOME = ${M2_HOME}"
          }
       }
-      stage('Checkout') {
-         steps {
-            checkout scm
-         }
+      node {
+         checkout scm
       }
       stage('build') {
          steps {
