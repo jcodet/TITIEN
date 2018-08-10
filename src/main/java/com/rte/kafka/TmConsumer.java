@@ -19,8 +19,8 @@ public class TmConsumer {
 	private final static String TOPIC = "tm-topic";
     private final static String BOOTSTRAP_SERVERS =
             "192.168.56.101:9092,192.168.56.101:9093,192.168.56.101:9094";
-    
-    
+
+
     private static Consumer<Long, String> createConsumer() {
         final Properties props = new Properties();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -40,7 +40,7 @@ public class TmConsumer {
         consumer.subscribe(Collections.singletonList(TOPIC));
         return consumer;
     }
-    
+
     static void runConsumer() throws InterruptedException {
         final Consumer<Long, String> consumer = createConsumer();
 
@@ -51,9 +51,7 @@ public class TmConsumer {
         ConsumerRecord<Long, String> record;
         List<Double> listOfTm = new ArrayList<Double>();
         int i = 0;
-        
         Iterator<ConsumerRecord<Long, String>> it = null;
-        
         while (true) {
             final ConsumerRecords<Long, String> consumerRecords = consumer.poll(10);
 
@@ -64,23 +62,22 @@ public class TmConsumer {
                 	continue;
                 }
             }
-            
+
             for(it = consumerRecords.iterator(); it.hasNext(); ){
             	record = it.next();
             	if("START".equals(record.value())) {
             		debut = System.currentTimeMillis();
-            		System.out.println("--- \nDébut transfert 70K TM " + new Date(debut));
+            		System.out.println("--- \nDÃ©but transfert 70K TM " + new Date(debut));
             	}
             	else if("END".equals(record.value())) {
 	            	fin = System.currentTimeMillis();
 	            	System.out.println("Fin transfert " + listOfTm.size() + " TM " + new Date(fin) + "\n---");
-	            	System.out.println("Temps passé:"+(fin-debut)+ " ms");
+	            	System.out.println("Temps passÃ©:"+(fin-debut)+ " ms");
 	            	System.out.println("DONE");
-	            	System.out.println("Moyenne des " + listOfTm.size() + " TM reçues:"+TmConsumer.moyenne(listOfTm));       	
+	            	System.out.println("Moyenne des " + listOfTm.size() + " TM reÃ§ues:"+TmConsumer.moyenne(listOfTm));
             	}
             	else
             		listOfTm.add(Double.valueOf(record.value()).doubleValue());
-            	
             }
             consumer.commitAsync();
 
@@ -89,23 +86,22 @@ public class TmConsumer {
         consumer.close();
 
     }
-    
     /**
      * @param args
-     * @return moyenne arithmétique
+     * @return moyenne arithmï¿½tique
      */
     public static double moyenne(List<Double> args ){
     	if(args.size() == 0 ) {
     		return 0;
     	}
     	double total = 0;
-    	
+
     	for(double d : args) {
     		total += d;
     	}
     	return total/args.size();
     }
-    
+
   public static void main(String... args) throws Exception {
       runConsumer();
   }

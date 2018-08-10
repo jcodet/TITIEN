@@ -1,2 +1,2 @@
-com\rte\kafka\KarteProducer.class
-com\rte\kafka\TitienConsumer.class
+com/rte/kafka/TmConsumer.class
+com/rte/kafka/KarteProducer.class
