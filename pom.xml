@@ -29,22 +29,22 @@
   </dependencies>
 
   <build>
-    <sourceDirectory>/home/julien/dev/TITIEN/src/main/java</sourceDirectory>
-    <scriptSourceDirectory>/home/julien/dev/TITIEN/src/scripts</scriptSourceDirectory>
-    <testSourceDirectory>/home/julien/dev/TITIEN/src/test/java</testSourceDirectory>
-    <outputDirectory>/home/julien/dev/TITIEN/target/classes</outputDirectory>
-    <testOutputDirectory>/home/julien/dev/TITIEN/target/test-classes</testOutputDirectory>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <scriptSourceDirectory>src/scripts</scriptSourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <outputDirectory>target/classes</outputDirectory>
+    <testOutputDirectory>target/test-classes</testOutputDirectory>
     <resources>
       <resource>
-        <directory>/home/julien/dev/TITIEN/src/main/resources</directory>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
     <testResources>
       <testResource>
-        <directory>/home/julien/dev/TITIEN/src/test/resources</directory>
+        <directory>src/test/resources</directory>
       </testResource>
     </testResources>
-    <directory>/home/julien/dev/TITIEN/target</directory>
+    <directory>target</directory>
     <finalName>TITIEN-0.0.1-SNAPSHOT</finalName>
     <pluginManagement>
       <plugins>
