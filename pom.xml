@@ -23,7 +23,7 @@
   <build>
     <sourceDirectory>/home/julien/dev/TITIEN/src/main/java</sourceDirectory>
     <scriptSourceDirectory>/home/julien/dev/TITIEN/src/scripts</scriptSourceDirectory>
-    <testSourceDirectory>/home/julien/dev/TITIEN/src/main/test/java</testSourceDirectory>
+    <testSourceDirectory>/home/julien/dev/TITIEN/src/test/java</testSourceDirectory>
     <outputDirectory>/home/julien/dev/TITIEN/target/classes</outputDirectory>
     <testOutputDirectory>/home/julien/dev/TITIEN/target/test-classes</testOutputDirectory>
     <resources>
