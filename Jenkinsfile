@@ -18,8 +18,7 @@ pipeline {
          }
          post {
             always {
-              archive "target/**/*"
-              junit 'target/surefire-reports/*.xml'
+              echo 'This will always run'
             }
             success {
                echo 'This will run only if successful'
@@ -36,6 +35,9 @@ pipeline {
             }
          }
       }
+      stage('Publish test results') {
+      junit '**/test-results/test/*.xml'
+  }
    }
 
 }
