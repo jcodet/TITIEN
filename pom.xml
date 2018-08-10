@@ -4,9 +4,9 @@
   <artifactId>TITIEN</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>TITIEN</name>
-  
+
   <dependencies>
-        
+
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
@@ -19,24 +19,24 @@
         	<version>1.2.2</version>
         </dependency>
   </dependencies>
-  
+
   <build>
-    <sourceDirectory>D:\workspace\TITIEN\src\main\java</sourceDirectory>
-    <scriptSourceDirectory>D:\workspace\TITIEN\src\scripts</scriptSourceDirectory>
-    <testSourceDirectory>D:\workspace\TITIEN\src\test\java</testSourceDirectory>
-    <outputDirectory>D:\workspace\TITIEN\target\classes</outputDirectory>
-    <testOutputDirectory>D:\workspace\TITIEN\target\test-classes</testOutputDirectory>
+    <sourceDirectory>/home/julien/dev/TITIEN/src/main/java</sourceDirectory>
+    <scriptSourceDirectory>/home/julien/dev/TITIEN/src/scripts</scriptSourceDirectory>
+    <testSourceDirectory>/home/julien/dev/TITIEN/src/main/test/java</testSourceDirectory>
+    <outputDirectory>/home/julien/dev/TITIEN/target/classes</outputDirectory>
+    <testOutputDirectory>/home/julien/dev/TITIEN/target/test-classes</testOutputDirectory>
     <resources>
       <resource>
-        <directory>D:\workspace\TITIEN\src\main\resources</directory>
+        <directory>/home/julien/dev/TITIEN/src/main/resources</directory>
       </resource>
     </resources>
     <testResources>
       <testResource>
-        <directory>D:\workspace\TITIEN\src\test\resources</directory>
+        <directory>/home/julien/dev/TITIEN/src/test/resources</directory>
       </testResource>
     </testResources>
-    <directory>D:\workspace\TITIEN\target</directory>
+    <directory>/home/julien/dev/TITIEN/target</directory>
     <finalName>TITIEN-0.0.1-SNAPSHOT</finalName>
     <pluginManagement>
       <plugins>
@@ -67,5 +67,5 @@
     </plugins>
     </pluginManagement>
   </build>
-  
+
 </project>
