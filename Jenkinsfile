@@ -19,7 +19,7 @@ pipeline {
          post {
             always {
               echo 'Enregistrement des résultats de tests dans:'
-              echo '**/test-results/test/*.xml'
+              echo '**/surefire-reports/*.xml'
             }
             success {
                echo 'This will run only if successful'
