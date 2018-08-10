@@ -18,7 +18,8 @@ pipeline {
          }
          post {
             always {
-              echo 'This will always run'
+              echo 'Enregistrement des résultats de tests dans:'
+              echo '**/test-results/test/*.xml'
             }
             success {
                echo 'This will run only if successful'
@@ -37,7 +38,7 @@ pipeline {
       }
       stage('Publish test results') {
          steps {
-            junit '**/test-results/test/*.xml'   
+            junit '**/test-results/test/*.xml'
          }
 
       }
