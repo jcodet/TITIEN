@@ -4,6 +4,9 @@ pipeline {
      maven 'M3'
      jdk 'jdk8'
    }
+   node {
+      checkout scm
+   }
    stages {
       stage ('Initialize') {
          steps {
@@ -11,9 +14,7 @@ pipeline {
             echo "M2_HOME = ${M2_HOME}"
          }
       }
-      node {
-         checkout scm
-      }
+
       stage('build') {
          steps {
            "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
