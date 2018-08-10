@@ -24,7 +24,6 @@ pipeline {
          post {
             always {
               echo 'Enregistrement des résultats de tests dans:'
-              echo '**/surefire-reports/*.xml'
             }
             success {
                echo 'This will run only if successful'
@@ -43,7 +42,7 @@ pipeline {
       }
       stage('Publish test results') {
          steps {
-            junit '**/test-results/test/*.xml'
+            junit '**/surefire-reports/*.xml'
          }
 
       }
