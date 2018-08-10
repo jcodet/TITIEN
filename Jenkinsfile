@@ -11,9 +11,12 @@ pipeline {
             echo "M2_HOME = ${M2_HOME}"
          }
       }
+      stage('Checkout') {
+        checkout scm
+      }
       stage('build') {
          steps {
-           echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+           "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
            sh 'mvn clean install -Dmaven.test.failure.ignore=true'
          }
          post {
