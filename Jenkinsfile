@@ -27,6 +27,10 @@ pipeline {
             }
             success {
                echo 'This will run only if successful'
+               mail subject:'TITIEN build result: OK',
+                    body: 'Result of the build is OK',
+                    sender: 'Jenkins@PCSQLI',
+                    to: 'julien.codet@gmail.com'
             }
             failure {
                echo 'This will run only if failed'
