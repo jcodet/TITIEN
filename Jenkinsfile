@@ -32,7 +32,7 @@ pipeline {
                     to: 'julien.codet@gmail.com'
             }
             failure {
-               echo 'This will run only if failed!'
+               echo 'This will run only if failed!!'
             }
             unstable {
                echo 'This will run only if the run was marked as unstable'
