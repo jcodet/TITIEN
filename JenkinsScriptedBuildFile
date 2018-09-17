@@ -1,0 +1,18 @@
+// Les services pour le pipeline
+def versionService, releaseVersion
+
+catchError {
+    stage('INIT') {
+        node('titien') {
+            //supression des actions git locales (commits, tags...)
+            sh "rm -rf * .git"
+            //checkout du commit qui a déclenché le build
+            checkout scm
+
+           testService = load 'pipeline/utils/myScript.groovy'
+           releaseVersion = versionService.getReleaseVersion('application/')
+           sh "echo ${releaseVersion}"
+
+        }
+    }
+}
