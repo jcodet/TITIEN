@@ -11,7 +11,7 @@ def versionService, releaseVersion
             //checkout du commit qui a déclenché le build
             checkout scm
 
-           testService = load 'pipeline/utils/myScript.groovy'
+           versionService = load 'pipeline/utils/myScript.groovy'
            releaseVersion = versionService.getReleaseVersion('application/')
            sh "echo ${releaseVersion}"
 
