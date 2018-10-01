@@ -6,9 +6,6 @@ def versionService, releaseVersion
     stage('INIT') {
         node('titien') {
 
-        options {
-            skipDefaultCheckout true
-          }
             //supression des actions git locales (commits, tags...)
             sh "rm -rf * .git"
             //checkout du commit qui a déclenché le build
