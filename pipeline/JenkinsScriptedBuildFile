@@ -12,7 +12,7 @@ def versionService, releaseVersion
             checkout scm
 
            versionService = load 'pipeline/utils/myScript.groovy'
-           releaseVersion = versionService.getReleaseVersion('/')
+           releaseVersion = versionService.getReleaseVersion('application/')
            sh "echo ${releaseVersion}"
 
         }
