@@ -1,6 +1,12 @@
 // Les services pour le pipeline
 def versionService, releaseVersion
 
+// Les services pour le pipeline
+def dockerService
+
+// Les containers Docker
+def mvn
+
   catchError {
 
     stage('INIT') {
@@ -11,10 +17,30 @@ def versionService, releaseVersion
             //checkout du commit qui a déclenché le build
             checkout scm
 
+           dockerService = load 'pipeline/utils/DockerService.groovy'
            versionService = load 'pipeline/utils/myScript.groovy'
            releaseVersion = versionService.getReleaseVersion('application/')
-           sh "echo ${releaseVersion}"
+           echo "Construction de la V${releaseVersion}"
+
+           mvn = docker.image("${imageVersion['maven']}")
 
         }
     }
+    node('titien') {
+      sh "rm -rf * .git"
+      checkout scm
+      stage('BUILD BACK') {
+          try {
+            mvn.pull()
+           sh "docker run --rm -v ${workspace}/application:/app -v ~/.m2/repository/:/root/.m2/repository/ -v ${workspace}/settings/maven/:/root/.m2/ ${mvn.imageName()} clean verify -B -Pintegration"
+        } catch (Exception e) {
+            echo "Build Back KO ${env.JOB_NAME} <${env.BUILD_URL}|#${env.BUILD_NUMBER}>"
+            throw e
+        } finally {
+            //step([$class: 'JUnitResultArchiver', testResults: '**/target/*-reports/TEST-*.xml'])
+        }
+      }
+
+    }
+
 }
