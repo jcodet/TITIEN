@@ -1,5 +1,5 @@
 // Les services pour le pipeline
-def versionService, releaseVersion
+def versionService, releaseVersion, imageVersion
 
 // Les services pour le pipeline
 def dockerService
@@ -20,6 +20,8 @@ def mvn
            dockerService = load 'pipeline/utils/DockerService.groovy'
            versionService = load 'pipeline/utils/myScript.groovy'
            releaseVersion = versionService.getReleaseVersion('application/')
+           imageVersion = versionService.images()
+
            echo "Construction de la V${releaseVersion}"
 
            mvn = docker.image("${imageVersion['maven']}")
@@ -29,6 +31,7 @@ def mvn
     node('titien') {
       sh "rm -rf * .git"
       checkout scm
+      def workspace = pwd()
       stage('BUILD BACK') {
           try {
             mvn.pull()
