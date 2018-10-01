@@ -1,9 +1,14 @@
 // Les services pour le pipeline
 def versionService, releaseVersion
 
-catchError {
+options {
+    skipDefaultCheckout true
+  }
+  catchError {
+
     stage('INIT') {
         node('titien') {
+
             //supression des actions git locales (commits, tags...)
             sh "rm -rf * .git"
             //checkout du commit qui a déclenché le build
