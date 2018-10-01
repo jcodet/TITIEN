@@ -17,7 +17,7 @@ def getReleaseVersion(pomPath = './') {
  */
 def images() {
     final images = [
-            maven  : ' huippujanne/maven-awscli-3.3.9-jdk-8'
+            maven  : 'carlossg/docker-maven'
     ]
     return images
 }
