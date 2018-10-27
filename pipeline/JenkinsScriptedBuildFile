@@ -36,12 +36,16 @@ def mvn
           try {
             mvn.pull()
            sh "docker run --rm -v ${workspace}/application:/app -v ~/.m2/repository/:/root/.m2/repository/ -v ${workspace}/settings/maven/:/root/.m2/ ${mvn.imageName()} clean verify -B -Pintegration"
+		milestone()
         } catch (Exception e) {
             echo "Build Back KO ${env.JOB_NAME} <${env.BUILD_URL}|#${env.BUILD_NUMBER}>"
             throw e
         } finally {
             //step([$class: 'JUnitResultArchiver', testResults: '**/target/*-reports/TEST-*.xml'])
         }
+stage('PACKAGE') {
+	releaseVersion = versionService.getReleaseVersion('application/')
+}
       }
 
     }
