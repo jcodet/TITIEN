@@ -42,7 +42,7 @@ pipeline {
          }
       }
       stage('PACKAGE') {
-          releaseVersion = versionService.getReleaseVersion('application/')
+          //releaseVersion = versionService.getReleaseVersion('application/')
           
       }
       stage('Publish test results') {
