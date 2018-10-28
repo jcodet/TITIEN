@@ -10,7 +10,7 @@ def mvn
   catchError {
 
     stage('INIT') {
-        node('titien') {
+         node('master') {
 
             //supression des actions git locales (commits, tags...)
             sh "rm -rf * .git"
@@ -26,13 +26,14 @@ def mvn
 
            mvn = docker.image("${imageVersion['maven']}")
 
-        }
+         }
     }
-    node('titien') {
-      sh "rm -rf * .git"
-      checkout scm
-      def workspace = pwd()
+    node('master') {
       stage('BUILD BACK') {
+        sh "rm -rf * .git"
+        checkout scm
+        def workspace = pwd()
+
           try {
             mvn.pull()
            sh "docker run --rm -v ${workspace}/application:/app -v ~/.m2/repository/:/root/.m2/repository/ -v ${workspace}/settings/maven/:/root/.m2/ ${mvn.imageName()} clean verify -B -Pintegration"
