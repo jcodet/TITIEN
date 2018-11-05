@@ -7,48 +7,51 @@ def dockerService
 // Les containers Docker
 def mvn
 
-  catchError {
-
+catchError {
+  node('master') {
     stage('INIT') {
-         node('master') {
+      //supression des actions git locales (commits, tags...)
+      sh "rm -rf * .git"
 
-            //supression des actions git locales (commits, tags...)
-            sh "rm -rf * .git"
-            //checkout du commit qui a déclenché le build
-            checkout scm
+      //checkout du commit qui a déclenché le build
+      checkout scm
 
-           dockerService = load 'pipeline/utils/DockerService.groovy'
-           versionService = load 'pipeline/utils/myScript.groovy'
-           releaseVersion = versionService.getReleaseVersion('application/')
-           imageVersion = versionService.images()
+      dockerService = load 'pipeline/utils/DockerService.groovy'
+      versionService = load 'pipeline/utils/myScript.groovy'
+      releaseVersion = versionService.getReleaseVersion('application/')
+      environmentService = load 'pipeline/utils/EnvironmentService.groovy'
+      imageVersion = versionService.images()
 
-           echo "Construction de la V${releaseVersion}"
+      echo "Construction de la V${releaseVersion}"
+      mvn = docker.image("${imageVersion['maven']}")
 
-           mvn = docker.image("${imageVersion['maven']}")
-
-         }
     }
-    node('master') {
-      stage('BUILD BACK') {
-        sh "rm -rf * .git"
-        checkout scm
-        def workspace = pwd()
 
-          try {
-            mvn.pull()
-           //sh "docker run --rm -v ${workspace}/application:/app -v ~/.m2/repository/:/root/.m2/repository/ -v ${workspace}/settings/maven/:/root/.m2/ ${mvn.imageName()} clean verify -B -Pintegration"
-		milestone()
-        } catch (Exception e) {
-            echo "Build Back KO ${env.JOB_NAME} <${env.BUILD_URL}|#${env.BUILD_NUMBER}>"
-            throw e
-        } finally {
-            //step([$class: 'JUnitResultArchiver', testResults: '**/target/*-reports/TEST-*.xml'])
-        }
-stage('PACKAGE') {
-	releaseVersion = versionService.getReleaseVersion('application/')
-}
+    stage('BUILD BACK') {
+      sh "rm -rf * .git"
+      checkout scm
+      def workspace = pwd()
+
+      try {
+        mvn.pull()
+        sh "docker run --rm -v ${workspace}/application:/app -v ~/.m2/repository/:/root/.m2/repository/ -v ${workspace}/settings/maven/:/root/.m2/ ${mvn.imageName()} clean verify -B -Pintegration"
+        //mvn "org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true -Pcoverage-per-test"
+        milestone()
+      } catch (Exception e) {
+        echo "Build Back KO ${env.JOB_NAME} <${env.BUILD_URL}|#${env.BUILD_NUMBER}>"
+        throw e
+      } finally {
+      //step([$class: 'JUnitResultArchiver', testResults: '**/target/*-reports/TEST-*.xml'])
       }
+    }
+    stage('PACKAGE') {
+      releaseVersion = versionService.getReleaseVersion('application/')
+      echo "Release version is $releaseVersion"
 
     }
+    stage('DEPLOY') {
+      //environmentService.deployWithAnsible(ansible, environments.INT)
 
+    }
+  }
 }
