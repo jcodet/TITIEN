@@ -57,6 +57,12 @@
     	</configuration>
         <executions>
           <execution>
+              <goals>
+                  <goal>integration</goal>
+                  <goal>verify</goal>
+              </goals>
+          </execution>
+          <execution>
             <id>default-compile</id>
             <phase>compile</phase>
             <goals>
