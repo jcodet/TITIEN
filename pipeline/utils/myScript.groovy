@@ -17,7 +17,7 @@ def getReleaseVersion(pomPath = './') {
  */
 def images() {
     final images = [
-            maven  : 'maven:3.5.4-jdk-10-slim'
+            maven  : 'maven:3.5.4-jdk-10-alpine'
     ]
     return images
 }
