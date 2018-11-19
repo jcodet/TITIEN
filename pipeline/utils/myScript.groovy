@@ -17,7 +17,7 @@ def getReleaseVersion(pomPath = './') {
  */
 def images() {
     final images = [
-            maven  : 'maven:3.5.4-alpine'
+            maven  : 'maven:3.3.9-jdk-8'
     ]
     return images
 }
