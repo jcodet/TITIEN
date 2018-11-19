@@ -16,8 +16,9 @@ catchError {
       //checkout du commit qui a déclenché le build
       checkout scm
 
-      dockerService = load 'pipeline/utils/DockerService.groovy'
       versionService = load 'pipeline/utils/myScript.groovy'
+      credentialService = load 'pipeline/utils/CredentialService.groovy'
+      dockerService = load 'pipeline/utils/DockerService.groovy'
       releaseVersion = versionService.getReleaseVersion('application/')
       environmentService = load 'pipeline/utils/EnvironmentService.groovy'
       imageVersion = versionService.images()
