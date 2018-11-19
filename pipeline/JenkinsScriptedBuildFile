@@ -35,7 +35,7 @@ catchError {
 
       try {
         mvn.pull()
-        sh "docker run --rm -v ${workspace}/application:/app -v ~/.m2/repository/:/root/.m2/repository/ -v ${workspace}/settings/maven/:/root/.m2/ ${mvn.imageName()} clean verify -B -Pintegration"
+        sh "docker run --rm -v ${workspace}/application/:/app -v ~/.m2/repository/:/root/.m2/repository/ -v ${workspace}/settings/maven/:/root/.m2/ ${mvn.imageName()} -f /app/pom.xml clean verify -B"
         //mvn "org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true -Pcoverage-per-test"
         milestone()
       } catch (Exception e) {
