@@ -13,7 +13,6 @@ def runWithCredentials(credentialsId, closure) {
         } else {
             configSSH = "/home/${usr}/.ssh/config"
         }
-        writeFile file: "${configSSH}", text: "Host gitlab.lan.bdx.sqli.com\n\tIdentityFile ${env.RSA_KEY}"
         try {
             sh "git config user.name admin"
             sh "git config user.email jcodet@sqli.com"
